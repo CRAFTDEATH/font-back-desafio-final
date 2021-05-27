@@ -1,0 +1,94 @@
+_schema-version: "3.2"
+ID: app-l4edesafio
+description: A Fiori application.
+version: 0.0.1
+modules:
+- name: app-l4edesafio-dest-content
+  type: com.sap.application.content
+  requires:
+  - name: app-l4edesafio-dest-srv
+    parameters:
+      content-target: true
+  - name: app-l4edesafio-repo-host
+    parameters:
+      service-key:
+        name: app-l4edesafio-repo-host-key
+  - name: app-l4edesafio-uaa
+    parameters:
+      service-key:
+        name: app-l4edesafio-uaa-key
+  parameters:
+    content:
+      instance:
+        destinations:
+        - Name: app-l4edesafio_repo_host
+          ServiceInstanceName: app-l4edesafio-html5-srv
+          ServiceKeyName: app-l4edesafio-repo-host-key
+          sap.cloud.service: app-l4edesafio
+        - Authentication: OAuth2UserTokenExchange
+          Name: app-l4edesafio_uaa
+          ServiceInstanceName: app-l4edesafio-xsuaa-srv
+          ServiceKeyName: app-l4edesafio-uaa-key
+          sap.cloud.service: app-l4edesafio
+        existing_destinations_policy: ignore
+  build-parameters:
+    no-source: true
+- name: app-l4edesafio-app-content
+  type: com.sap.application.content
+  path: .
+  requires:
+  - name: app-l4edesafio-repo-host
+    parameters:
+      content-target: true
+  build-parameters:
+    build-result: resources
+    requires:
+    - artifacts:
+      - appl4edesafio.zip
+      name: appl4edesafio
+      target-path: resources/
+- name: appl4edesafio
+  type: html5
+  path: .
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+resources:
+- name: app-l4edesafio-dest-srv
+  type: org.cloudfoundry.managed-service
+  parameters:
+    config:
+      HTML5Runtime_enabled: true
+      init_data:
+        instance:
+          destinations:
+          - Authentication: NoAuthentication
+            Name: ui5
+            ProxyType: Internet
+            Type: HTTP
+            URL: https://ui5.sap.com
+          existing_destinations_policy: update
+      version: 1.0.0
+    service: destination
+    service-name: app-l4edesafio-dest-srv
+    service-plan: lite
+- name: app-l4edesafio-uaa
+  type: org.cloudfoundry.managed-service
+  parameters:
+    path: ./xs-security.json
+    service: xsuaa
+    service-name: app-l4edesafio-xsuaa-srv
+    service-plan: application
+- name: app-l4edesafio-repo-host
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-name: app-l4edesafio-html5-srv
+    service-plan: app-host
+parameters:
+  deploy_mode: html5-repo
+  enable-parallel-deployments: true

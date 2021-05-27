@@ -1,0 +1,230 @@
+{
+    "_version": "1.32.0",
+    "sap.app": {
+        "id": "app.l4edesafio",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "applicationVersion": {
+            "version": "1.0.0"
+        },
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "resources": "resources.json",
+        "ach": "ach"
+    },
+    "sap.ui": {
+        "technology": "UI5",
+        "icons": {
+            "icon": "sap-icon://task",
+            "favIcon": "",
+            "phone": "",
+            "phone@2": "",
+            "tablet": "",
+            "tablet@2": ""
+        },
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        }
+    },
+    "sap.ui5": {
+        "flexEnabled": false,
+        "rootView": {
+            "viewName": "app.l4edesafio.view.App",
+            "type": "XML",
+            "async": true,
+            "id": "App"
+        },
+        "dependencies": {
+            "minUI5Version": "1.66.0",
+            "libs": {
+                "sap.ui.core": {},
+                "sap.m": {},
+                "sap.ui.layout": {}
+            }
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleName": "app.l4edesafio.i18n.i18n"
+                }
+            }
+        },
+        "resources": {
+            "css": [
+                {
+                    "uri": "css/style.css"
+                }
+            ]
+        },
+        "routing": {
+            "config": {
+                "routerClass": "sap.m.routing.Router",
+                "viewType": "XML",
+                "async": true,
+                "viewPath": "app.l4edesafio.view",
+                "controlAggregation": "pages",
+                "controlId": "app",
+                "clearControlAggregation": false
+            },
+           "routes": [
+                {
+                    "name": "RouteApp",
+                    "pattern": "RouteApp",
+                    "target": [
+                        "TargetApp"
+                    ]
+                },
+                {
+                    "pattern": "",
+                    "name": "Menu",
+                    "target": [
+                        "Menu"
+                    ]
+                },
+                {
+                    "pattern": "CadastroUsuario",
+                    "name": "CadastroUsuario",
+                    "target": [
+                        "Menu",
+                        "CadastroUsuario"
+                    ]
+                },
+                {
+                    "pattern": "LoginUsuario",
+                    "name": "LoginUsuario",
+                    "target": [
+                        "Menu",
+                        "LoginUsuario"
+                    ]
+                },
+                {
+                    "pattern": "CadastroServico",
+                    "name": "CadastroServico",
+                    "target": [
+                        "Menu",
+                        "CadastroServico"
+                    ]
+                },
+                 {
+                    "pattern": "AvaliacaoServico/{id}",
+                    "name": "AvaliacaoServico",
+                    "target": ["AvaliacaoServico"]
+                },
+                {
+                    "pattern": "CadastroCategoria",
+                    "name": "CadastroCategoria",
+                    "target": [
+                        "Menu",
+                        "CadastroCategoria"
+                    ]
+                },
+                {
+                    "pattern": "ConsultaServico",
+                    "name": "ConsultaServico",
+                    "target": [
+                        "Menu",
+                        "ConsultaServico"
+                    ]
+                },
+                {
+                   
+                    "name": "DetalheServico",
+                    "pattern": "DetalheServico/{id}",
+                    "target": [
+                        "DetalheServico"
+                    ]
+                }
+            ],
+            "targets": {
+                "Menu": {
+                    "viewType": "XML",
+                    "transition": "slide",
+                    "clearControlAggregation": false,
+                    "viewId": "menu",
+                    "viewName": "Menu"
+                },
+                "TargetApp": {
+                    "viewType": "XML",
+                    "transition": "slide",
+                    "clearControlAggregation": false,
+                    "viewId": "App",
+                    "viewName": "App"
+                },
+                "LoginUsuario": {
+                    "viewType": "XML",
+                    "transition": "slide",
+                    "clearControlAggregation": false,
+                    "viewId": "loginusuario",
+                    "viewName": "LoginUsuario",
+                    "controlId": "pageContainer",
+                    "parent": "Menu"
+                },
+                "CadastroUsuario": {
+                    "viewType": "XML",
+                    "transition": "slide",
+                    "clearControlAggregation": false,
+                    "viewId": "cadastrousuario",
+                    "viewName": "CadastroUsuario",
+                    "controlId": "pageContainer",
+                    "parent": "Menu"
+                },
+                "CadastroServico": {
+                    "viewType": "XML",
+                    "transition": "slide",
+                    "clearControlAggregation": false,
+                    "viewId": "cadastroservico",
+                    "viewName": "CadastroServico",
+                    "controlId": "pageContainer",
+                    "parent": "Menu"
+                },
+                "CadastroCategoria": {
+                    "viewType": "XML",
+                    "transition": "slide",
+                    "clearControlAggregation": false,
+                    "viewId": "cadastrocategoria",
+                    "viewName": "CadastroCategoria",
+                    "controlId": "pageContainer",
+                    "parent": "Menu"
+                },
+                "DetalheServico": {
+                    "viewType": "XML",
+                    "transition": "slide",
+                    "clearControlAggregation": false,
+                    "viewId": "detalheservico",
+                    "viewName": "DetalheServico",
+                    "controlId": "pageContainer",
+                    "parent": "Menu"
+                },
+                "ConsultaServico": {
+                    "viewType": "XML",
+                    "transition": "slide",
+                    "clearControlAggregation": false,
+                    "viewId": "consultaservico",
+                    "viewName": "ConsultaServico",
+                    "controlId": "pageContainer",
+                    "parent": "Menu"
+                },
+                "AvaliacaoServico": {
+                    "viewType": "XML",
+                    "transition": "slide",
+                    "clearControlAggregation": false,
+                    "viewId": "avaliacaoservico",
+                    "viewName": "AvaliacaoServico",
+                    "controlId": "pageContainer",
+                    "parent": "Menu"
+                }
+            }
+        }
+    },
+    "sap.cloud": {
+        "public": true,
+        "service": "app-l4edesafio"
+    }
+}

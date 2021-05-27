@@ -1,0 +1,45 @@
+<mvc:View 
+xmlns:f="sap.f" 
+controllerName="app.l4edesafio.controller.Menu" 
+xmlns:mvc="sap.ui.core.mvc" 
+displayBlock="true" 
+xmlns="sap.m"
+xmlns:tnt="sap.tnt" >
+    <tnt:ToolPage id="toolPage">
+        <tnt:header>
+		    <tnt:ToolHeader >
+                <Button icon="sap-icon://menu2" type="Default" press=".onSideNavButtonPress">
+                    <layoutData>
+                        <OverflowToolbarLayoutData priority="NeverOverflow" />
+                    </layoutData>
+                </Button>
+                <VBox >
+                <Image src="images/logo.png" width="50px" height="50px"/>
+                </VBox>
+            </tnt:ToolHeader>
+		</tnt:header>
+        <tnt:sideContent>
+			<tnt:SideNavigation itemSelect="onItemSelect" expanded="true">
+                <tnt:NavigationList
+                    id="navigationList"
+                    width="320px"
+                    selectedKey="subItem3">
+                    <tnt:NavigationListItem text="Banco de serviços" key="rootItem1" icon="sap-icon://cloud" >
+                        <tnt:NavigationListItem text="Cadastro de Usuário" id="cadastroUsuario" visible="true" select="onNavCadastroUsuario" icon="sap-icon://add-contact"/>
+                        <tnt:NavigationListItem text="Cadastro de Serviço" id="cadastroServico" visible="false" select="onNavCadastroServico" icon="sap-icon://add-contact" />
+                        <tnt:NavigationListItem text="Cadastro de Categoria" id="cadastroCategoria" visible="false" select="onNavCadastroCategoria" icon="sap-icon://add-contact"/>
+                        <tnt:NavigationListItem text="Consulta de Serviço" id="consultaServico" select="onNavConsultaServico" icon="sap-icon://add-contact"/>
+                         <tnt:NavigationListItem text="Login" select="onNavLoginUsuario" id="login" icon="sap-icon://add-contact"/>
+                         <tnt:NavigationListItem text="Deslogar" visible="false" select="onNavDeslogar"   id="deslogar" icon="sap-icon://add-contact"/>
+                    </tnt:NavigationListItem>
+                </tnt:NavigationList>
+            </tnt:SideNavigation>
+		</tnt:sideContent>
+         
+        <tnt:mainContents>
+			<NavContainer id="pageContainer">
+				<pages></pages>
+			</NavContainer>
+		</tnt:mainContents>
+        </tnt:ToolPage>
+</mvc:View>
