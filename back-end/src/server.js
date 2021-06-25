@@ -25,6 +25,7 @@ app.use(avaliacao)
 
 app.use(errors)
 
-app.listen(port);
 console.log(port);
+app.listen(port);
+
 
